@@ -127,8 +127,8 @@ export default function RepairConfigurator() {
                       </div>
 
                       <div>
-                        <h4 className="text-2xl sm:text-3xl font-bold mb-1 sm:mb-2">{bike.name}</h4>
-                        <p className="text-xs sm:text-sm text-muted-foreground">{bike.description}</p>
+                        <h4 className="text-2xl sm:text-3xl font-bold mb-1 sm:mb-2">{t(`model${bike.id.toUpperCase()}`)}</h4>
+                        <p className="text-xs sm:text-sm text-muted-foreground">{t(`model${bike.id.toUpperCase()}Description`)}</p>
                       </div>
                     </motion.button>
                   );
@@ -150,6 +150,17 @@ export default function RepairConfigurator() {
                 {CONFIGURATOR_PARTS.map((part) => {
                   const isSelected = selectedPart === part.id;
                   const Icon = iconMap[part.icon as keyof typeof iconMap];
+
+                  // Map part id to translation key prefix
+                  const partTranslationMap: Record<string, string> = {
+                    diagnose: 'partDiagnose',
+                    accu: 'partAccu',
+                    eshifter: 'partEshifter',
+                    voorwiel: 'partVoorwiel',
+                    achterwiel: 'partAchterwiel',
+                    knop: 'partKnop',
+                  };
+                  const keyPrefix = partTranslationMap[part.id];
 
                   return (
                     <motion.button
@@ -178,9 +189,9 @@ export default function RepairConfigurator() {
 
                       {/* Content */}
                       <div className="space-y-0.5 sm:space-y-1">
-                        <h4 className="font-semibold text-base sm:text-lg">{part.name}</h4>
-                        <p className="text-xs sm:text-sm font-medium text-gold">{part.price}</p>
-                        {part.code && <p className="text-xs text-muted-foreground">{part.code}</p>}
+                        <h4 className="font-semibold text-base sm:text-lg">{t(keyPrefix)}</h4>
+                        <p className="text-xs sm:text-sm font-medium text-gold">{t(`${keyPrefix}Price`)}</p>
+                        <p className="text-xs text-muted-foreground">{t(`${keyPrefix}Code`)}</p>
                       </div>
                     </motion.button>
                   );
@@ -244,13 +255,23 @@ export default function RepairConfigurator() {
                         transition={{ duration: 0.3 }}
                         className="space-y-3"
                       >
-                        {/* Diagnose Line */}
-                        <div className="flex items-center justify-between text-sm">
-                          <div className="flex items-center gap-2">
-                            <div className="size-2 rounded-full bg-blue-500" />
-                            <span className="text-foreground">{t('configuratorDiagnose')} €{pricing.diagnose}</span>
+                        {/* Diagnose Line - toon verrekening info */}
+                        {pricing.diagnoseVerrekend ? (
+                          <div className="flex items-center justify-between text-sm">
+                            <div className="flex items-center gap-2">
+                              <div className="size-2 rounded-full bg-green-500" />
+                              <span className="text-green-400 line-through">{t('configuratorDiagnose')} €40</span>
+                              <span className="text-green-400 text-xs">({t('configuratorDiagnoseDeducted')})</span>
+                            </div>
                           </div>
-                        </div>
+                        ) : pricing.diagnose > 0 && (
+                          <div className="flex items-center justify-between text-sm">
+                            <div className="flex items-center gap-2">
+                              <div className="size-2 rounded-full bg-blue-500" />
+                              <span className="text-foreground">{t('configuratorDiagnose')} €{pricing.diagnose}</span>
+                            </div>
+                          </div>
+                        )}
 
                         {/* Labor Line */}
                         {pricing.labor > 0 && (
@@ -275,12 +296,14 @@ export default function RepairConfigurator() {
                         {/* Visual Price Bar */}
                         <div className="pt-4">
                           <div className="h-2 rounded-full overflow-hidden bg-muted flex">
-                            <motion.div
-                              initial={{ width: 0 }}
-                              animate={{ width: `${(pricing.diagnose / pricing.total) * 100}%` }}
-                              transition={{ duration: 0.5, ease: 'easeOut' }}
-                              className="bg-blue-500"
-                            />
+                            {pricing.diagnose > 0 && (
+                              <motion.div
+                                initial={{ width: 0 }}
+                                animate={{ width: `${(pricing.diagnose / pricing.total) * 100}%` }}
+                                transition={{ duration: 0.5, ease: 'easeOut' }}
+                                className="bg-blue-500"
+                              />
+                            )}
                             {pricing.labor > 0 && (
                               <motion.div
                                 initial={{ width: 0 }}
@@ -299,6 +322,17 @@ export default function RepairConfigurator() {
                             )}
                           </div>
                         </div>
+
+                        {/* Vertrouwen opbouwende melding */}
+                        {pricing.diagnoseVerrekend && (
+                          <motion.p
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            className="text-xs text-green-400 pt-2"
+                          >
+                            {t('configuratorDiagnoseFreeNote')}
+                          </motion.p>
+                        )}
                       </motion.div>
                     )}
                   </AnimatePresence>

@@ -2,28 +2,38 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Battery, Zap, Monitor, Radio, Cpu } from 'lucide-react';
+import { Battery, Zap, Monitor, Radio, Cpu, CircleDot } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { BikeSvg, BikeComponent } from '@/components/shared/bike-svg';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { COMPONENT_DATA } from '@/lib/constants';
 
 const COMPONENT_ICONS = {
   battery: Battery,
-  motor: Zap,
+  frontWheel: Zap,
   display: Monitor,
-  sensor: Radio,
-  controller: Cpu,
+  button: CircleDot,
+  eshifter: Radio,
+  backWheel: Cpu,
 } as const;
+
+// Map component ID to translation key prefix
+const COMPONENT_TRANSLATION_MAP: Record<BikeComponent, string> = {
+  battery: 'componentBattery',
+  frontWheel: 'componentFrontWheel',
+  display: 'componentDisplay',
+  button: 'componentButton',
+  eshifter: 'componentEshifter',
+  backWheel: 'componentBackWheel',
+};
 
 export function BikeExplorer() {
   const t = useTranslations();
   const [selectedComponent, setSelectedComponent] = useState<BikeComponent | null>(null);
 
-  const componentData = selectedComponent ? COMPONENT_DATA[selectedComponent] : null;
   const Icon = selectedComponent ? COMPONENT_ICONS[selectedComponent] : null;
+  const translationPrefix = selectedComponent ? COMPONENT_TRANSLATION_MAP[selectedComponent] : null;
 
   return (
     <section
@@ -85,7 +95,7 @@ export function BikeExplorer() {
                     transition={{ duration: 0.3 }}
                     className="space-y-6"
                   >
-                    {!selectedComponent ? (
+                    {!selectedComponent || !translationPrefix ? (
                       /* Default State - No Component Selected */
                       <div className="flex flex-col items-center justify-center py-8 sm:py-12 text-center">
                         <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-gold/10 border border-gold/20 flex items-center justify-center mb-4 sm:mb-6">
@@ -122,10 +132,10 @@ export function BikeExplorer() {
                           </div>
                           <div className="flex-1 min-w-0">
                             <h3 className="text-xl sm:text-2xl font-bold text-white mb-1">
-                              {componentData?.title}
+                              {t(`${translationPrefix}`)}
                             </h3>
                             <p className="text-xs sm:text-sm text-zinc-400">
-                              {componentData?.subtitle}
+                              {t(`${translationPrefix}Subtitle`)}
                             </p>
                           </div>
                         </div>
@@ -136,13 +146,13 @@ export function BikeExplorer() {
                             variant="destructive"
                             className="text-sm font-mono px-3 py-1"
                           >
-                            {componentData?.error}
+                            {t(`${translationPrefix}Error`)}
                           </Badge>
                         </div>
 
                         {/* Description */}
                         <p className="text-sm sm:text-base text-zinc-300 leading-relaxed">
-                          {componentData?.description}
+                          {t(`${translationPrefix}Description`)}
                         </p>
 
                         {/* Price Display */}
@@ -152,7 +162,7 @@ export function BikeExplorer() {
                               {t('explorerRepairFrom')}
                             </span>
                             <span className="text-2xl sm:text-3xl font-bold text-gold">
-                              {componentData?.price}
+                              {t(`${translationPrefix}Price`)}
                             </span>
                           </div>
 

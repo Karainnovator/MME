@@ -2,9 +2,10 @@
 
 import React, { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
+import { useTranslations } from 'next-intl';
 import { Hotspot } from './hotspot';
 
-export type BikeComponent = 'battery' | 'motor' | 'display' | 'sensor' | 'controller';
+export type BikeComponent = 'battery' | 'frontWheel' | 'display' | 'button' | 'eshifter' | 'backWheel';
 
 interface BikeSvgProps {
   className?: string;
@@ -12,25 +13,38 @@ interface BikeSvgProps {
   onSelectComponent?: (component: BikeComponent) => void;
 }
 
-// Hotspot positions - Desktop values (works well on larger screens)
+// Hotspot positions - Desktop values
 const HOTSPOT_POSITIONS = {
-  battery: { top: '35%', left: '58%', label: 'Accu' },
-  motor: { top: '70%', left: '80%', label: 'Motor' },
-  display: { top: '35%', left: '45%', label: 'Display' },
-  sensor: { top: '70%', left: '20%', label: 'Sensor' },
-  controller: { top: '62%', left: '55%', label: 'Controller' },
+  battery: { top: '35%', left: '46%' },
+  frontWheel: { top: '70%', left: '80%' },
+  display: { top: '35%', left: '58%' },
+  button: { top: '22%', left: '82%' },
+  eshifter: { top: '50%', left: '44%' },
+  backWheel: { top: '70%', left: '20%' },
 } as const;
 
-// Mobile hotspot positions (adjusted for smaller aspect ratio)
+// Mobile hotspot positions
 const HOTSPOT_POSITIONS_MOBILE = {
-  battery: { top: '32%', left: '58%', label: 'Accu' },
-  motor: { top: '60%', left: '80%', label: 'Motor' },
-  display: { top: '32%', left: '46%', label: 'Display' },
-  sensor: { top: '60%', left: '20%', label: 'Sensor' },
-  controller: { top: '53%', left: '55%', label: 'Controller' },
+  battery: { top: '32%', left: '46%' },
+  frontWheel: { top: '62%', left: '80%' },
+  display: { top: '32%', left: '58%' },
+  button: { top: '20%', left: '82%' },
+  eshifter: { top: '48%', left: '44%' },
+  backWheel: { top: '62%', left: '20%' },
 } as const;
+
+// Map component ID to translation key
+const COMPONENT_LABEL_MAP: Record<BikeComponent, string> = {
+  battery: 'componentBattery',
+  frontWheel: 'componentFrontWheel',
+  display: 'componentDisplay',
+  button: 'componentButton',
+  eshifter: 'componentEshifter',
+  backWheel: 'componentBackWheel',
+};
 
 export function BikeSvg({ className, selectedComponent = null, onSelectComponent }: BikeSvgProps) {
+  const t = useTranslations();
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -101,7 +115,7 @@ export function BikeSvg({ className, selectedComponent = null, onSelectComponent
         <Hotspot
           key={id}
           id={id as BikeComponent}
-          label={position.label}
+          label={t(COMPONENT_LABEL_MAP[id as BikeComponent])}
           position={{ top: position.top, left: position.left }}
           isActive={selectedComponent === id}
           onClick={() => onSelectComponent?.(id as BikeComponent)}
