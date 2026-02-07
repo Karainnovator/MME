@@ -39,8 +39,13 @@ export function LanguageSwitcher() {
   const handleLanguageChange = (code: LanguageCode) => {
     setRotation(prev => prev + 360);
     setIsOpen(false);
-    // Navigate to the same page in the new locale
-    router.replace(pathname, { locale: code });
+    // Save scroll position before navigating
+    const scrollY = window.scrollY;
+    router.replace(pathname, { locale: code, scroll: false });
+    // Restore scroll position after locale change
+    requestAnimationFrame(() => {
+      window.scrollTo(0, scrollY);
+    });
   };
 
   return (

@@ -22,6 +22,8 @@ function TickerContent() {
     { text: t('trustCount'), highlight: t('trustCountHighlight') },
     { text: t('trustTime'), highlight: t('trustTimeHighlight') },
     { text: t('trustSuccess'), highlight: t('trustSuccessHighlight') },
+    { text: t('trustNoTravelCosts'), highlight: t('trustNoTravelCostsHighlight') },
+    { text: t('trustResponseTime'), highlight: t('trustResponseTimeHighlight') },
   ];
 
   return (
@@ -47,6 +49,8 @@ export function TrustTicker() {
   return (
     <section className="bg-surface border-y border-border overflow-hidden py-3 sm:py-4">
       <div className="flex animate-ticker hover:pause">
+        <TickerContent />
+        <TickerContent />
         <TickerContent />
         <TickerContent />
       </div>

@@ -87,6 +87,14 @@ export function Footer() {
               >
                 {t('contactWhatsApp')}
               </a>
+              <a
+                href="https://maps.google.com/?q=TT+Vasumweg+44+1033SC+Amsterdam"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs sm:text-sm text-muted-foreground transition-colors hover:text-gold"
+              >
+                TT Vasumweg 44, Unit 2.1 Noordkant, 1033SC Amsterdam
+              </a>
             </div>
           </div>
 

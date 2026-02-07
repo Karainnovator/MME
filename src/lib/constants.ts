@@ -1,10 +1,10 @@
-// Contact Information (Placeholders - Replace with actual data)
+// Contact Information
 export const CONTACT = {
-  phone: "+31 6 1234 5678",
-  phoneClean: "31612345678",
-  email: "info@mme.nl",
-  whatsapp: "31612345678",
-  kvk: "12345678",
+  phone: "+31 6 21302552",
+  phoneClean: "31621302552",
+  email: "manno.elwasty@icloud.com",
+  whatsapp: "31621302552",
+  kvk: "92783929",
 } as const;
 
 // Diagnose drempel - diagnosekosten worden verrekend bij reparaties boven dit bedrag
@@ -28,6 +28,8 @@ export const TRUST_ITEMS = [
   { text: "500+", highlight: "VanMoofs gerepareerd" },
   { text: "Transparant", highlight: "eerlijk advies" },
   { text: "Specialist", highlight: "S3 & X3 modellen" },
+  { text: "Geen voorrijkosten", highlight: "binnen de Randstad" },
+  { text: "Responstijd", highlight: "binnen 24 uur" },
 ] as const;
 
 // Bike Component Data for Explorer
@@ -142,8 +144,8 @@ export const PART_PRICING = {
   accu: { diagnose: 0, labor: 0, part: 250, total: 250, diagnoseVerrekend: true },
   eshifter: { diagnose: 0, labor: 0, part: 175, total: 175, diagnoseVerrekend: true },
   voorwiel: { diagnose: 0, labor: 0, part: 175, total: 175, diagnoseVerrekend: true },
-  achterwiel: { diagnose: 0, labor: 0, part: 150, total: 150, diagnoseVerrekend: false },
-  knop: { diagnose: 40, labor: 0, part: 45, total: 85, diagnoseVerrekend: false },
+  achterwiel: { diagnose: 40, labor: 0, part: 150, total: 190, diagnoseVerrekend: false },
+  knop: { diagnose: 0, labor: 0, part: 45, total: 45, diagnoseVerrekend: false },
 } as const;
 
 // Remmen prijzen
