@@ -72,13 +72,14 @@ export function ContactSection() {
     setIsSubmitting(true);
 
     try {
-      // TODO: Implement actual email submission with Resend
-      console.log("Form submitted:", formData);
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
 
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      if (!response.ok) throw new Error('Failed to send');
 
-      // Reset form on success
       setFormData({ name: "", phone: "", model: "", problem: "" });
       alert(t('contactFormSuccess'));
     } catch (error) {
