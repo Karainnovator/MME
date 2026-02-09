@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
-import { Phone, Mail, MessageCircle, Send } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Phone, Mail, MessageCircle, Send, CheckCircle2 } from "lucide-react";
 import { z } from "zod";
 import { useTranslations } from "next-intl";
 import { CONTACT, BIKE_MODELS } from "@/lib/constants";
@@ -23,6 +23,7 @@ import { cn } from "@/lib/utils";
 // Form validation schema
 const contactFormSchema = z.object({
   name: z.string().min(2, "Naam moet minimaal 2 karakters bevatten"),
+  email: z.string().email("Vul een geldig emailadres in"),
   phone: z.string().min(10, "Vul een geldig telefoonnummer in"),
   model: z.string().min(1, "Selecteer een model"),
   problem: z.string().optional(),
@@ -35,6 +36,7 @@ export function ContactSection() {
 
   const [formData, setFormData] = useState<ContactFormData>({
     name: "",
+    email: "",
     phone: "",
     model: "",
     problem: "",
@@ -42,6 +44,7 @@ export function ContactSection() {
 
   const [errors, setErrors] = useState<Partial<Record<keyof ContactFormData, string>>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   // Validate form
   const validateForm = (): boolean => {
@@ -78,13 +81,17 @@ export function ContactSection() {
         body: JSON.stringify(formData),
       });
 
+      if (response.status === 429) {
+        setErrors({ name: t('contactFormRateLimit') });
+        return;
+      }
       if (!response.ok) throw new Error('Failed to send');
 
-      setFormData({ name: "", phone: "", model: "", problem: "" });
-      alert(t('contactFormSuccess'));
+      setFormData({ name: "", email: "", phone: "", model: "", problem: "" });
+      setIsSuccess(true);
     } catch (error) {
       console.error("Error submitting form:", error);
-      alert(t('contactFormError'));
+      setErrors({ name: t('contactFormError') });
     } finally {
       setIsSubmitting(false);
     }
@@ -199,6 +206,36 @@ export function ContactSection() {
           >
             <Card className="bg-card/80 backdrop-blur-sm border-gold/10">
               <CardContent className="p-4 sm:p-6 pt-4 sm:pt-6">
+                <AnimatePresence mode="wait">
+                {isSuccess ? (
+                  <motion.div
+                    key="success"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.4 }}
+                    className="flex flex-col items-center justify-center text-center py-12 sm:py-16 space-y-4"
+                  >
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ type: 'spring', bounce: 0.5, delay: 0.1 }}
+                      className="size-16 sm:size-20 rounded-full bg-green-500/10 border border-green-500/20 flex items-center justify-center"
+                    >
+                      <CheckCircle2 className="size-8 sm:size-10 text-green-500" />
+                    </motion.div>
+                    <h3 className="text-xl sm:text-2xl font-bold">{t('contactFormSuccessTitle')}</h3>
+                    <p className="text-sm sm:text-base text-muted-foreground max-w-sm">{t('contactFormSuccess')}</p>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="mt-4 border-gold/30 text-gold hover:bg-gold/10"
+                      onClick={() => setIsSuccess(false)}
+                    >
+                      {t('contactFormSendAnother')}
+                    </Button>
+                  </motion.div>
+                ) : (
+                  <motion.div key="form" initial={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}>
                 {/* Form Header */}
                 <div className="mb-4 sm:mb-6 space-y-1 sm:space-y-2">
                   <h3 className="text-xl sm:text-2xl font-bold">{t('contactFormTitle')}</h3>
@@ -206,7 +243,7 @@ export function ContactSection() {
                 </div>
 
                 <form onSubmit={handleFormSubmit} className="space-y-4 sm:space-y-6">
-                  {/* Name and Phone Fields - 2 Column Layout on tablet+ */}
+                  {/* Name and Email Fields - 2 Column Layout on tablet+ */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {/* Name Field */}
                     <div className="space-y-2">
@@ -229,6 +266,30 @@ export function ContactSection() {
                       )}
                     </div>
 
+                    {/* Email Field */}
+                    <div className="space-y-2">
+                      <Label htmlFor="email" className="text-sm">
+                        {t('contactFormEmail')} <span className="text-destructive">*</span>
+                      </Label>
+                      <Input
+                        id="email"
+                        type="email"
+                        placeholder={t('contactFormEmailPlaceholder')}
+                        value={formData.email}
+                        onChange={(e) =>
+                          setFormData({ ...formData, email: e.target.value })
+                        }
+                        aria-invalid={!!errors.email}
+                        className={cn("w-full", errors.email && "border-destructive")}
+                      />
+                      {errors.email && (
+                        <p className="text-xs sm:text-sm text-destructive">{errors.email}</p>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Phone and Model Fields - 2 Column Layout on tablet+ */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {/* Phone Field */}
                     <div className="space-y-2">
                       <Label htmlFor="phone" className="text-sm">
@@ -249,38 +310,38 @@ export function ContactSection() {
                         <p className="text-xs sm:text-sm text-destructive">{errors.phone}</p>
                       )}
                     </div>
-                  </div>
 
-                  {/* Model Field */}
-                  <div className="space-y-2 sm:space-y-3">
-                    <Label htmlFor="model" className="text-sm">
-                      {t('contactFormModel')} <span className="text-destructive">*</span>
-                    </Label>
-                    <Select
-                      value={formData.model}
-                      onValueChange={(value) =>
-                        setFormData({ ...formData, model: value })
-                      }
-                    >
-                      <SelectTrigger
-                        id="model"
-                        className={cn(
-                          "w-full",
-                          errors.model && "border-destructive"
-                        )}
-                        aria-invalid={!!errors.model}
+                    {/* Model Field */}
+                    <div className="space-y-2">
+                      <Label htmlFor="model" className="text-sm">
+                        {t('contactFormModel')} <span className="text-destructive">*</span>
+                      </Label>
+                      <Select
+                        value={formData.model}
+                        onValueChange={(value) =>
+                          setFormData({ ...formData, model: value })
+                        }
                       >
-                        <SelectValue placeholder={t('contactFormModelPlaceholder')} />
-                      </SelectTrigger>
-                      <SelectContent position="popper" side="bottom" sideOffset={4}>
-                        <SelectItem value="s3">{t('contactFormModelS3')}</SelectItem>
-                        <SelectItem value="x3">{t('contactFormModelX3')}</SelectItem>
-                        <SelectItem value="other">{t('contactFormModelOther')}</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    {errors.model && (
-                      <p className="text-xs sm:text-sm text-destructive mt-2">{errors.model}</p>
-                    )}
+                        <SelectTrigger
+                          id="model"
+                          className={cn(
+                            "w-full",
+                            errors.model && "border-destructive"
+                          )}
+                          aria-invalid={!!errors.model}
+                        >
+                          <SelectValue placeholder={t('contactFormModelPlaceholder')} />
+                        </SelectTrigger>
+                        <SelectContent position="popper" side="bottom" sideOffset={4}>
+                          <SelectItem value="s3">{t('contactFormModelS3')}</SelectItem>
+                          <SelectItem value="x3">{t('contactFormModelX3')}</SelectItem>
+                          <SelectItem value="other">{t('contactFormModelOther')}</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      {errors.model && (
+                        <p className="text-xs sm:text-sm text-destructive mt-2">{errors.model}</p>
+                      )}
+                    </div>
                   </div>
 
                   {/* Problem Description Field */}
@@ -330,6 +391,9 @@ export function ContactSection() {
                     </Button>
                   </div>
                 </form>
+                  </motion.div>
+                )}
+                </AnimatePresence>
               </CardContent>
             </Card>
           </motion.div>
