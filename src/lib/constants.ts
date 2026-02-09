@@ -18,6 +18,7 @@ export const NAV_LINKS = [
   { href: "#diagnose", label: "Diagnose" },
   { href: "#configurator", label: "Configurator" },
   { href: "#diensten", label: "Diensten" },
+  { href: "#onderhoud", label: "Onderhoud" },
   { href: "#contact", label: "Contact" },
 ] as const;
 
@@ -149,18 +150,26 @@ export const PART_PRICING = {
 } as const;
 
 // Remmen prijzen
-export const REMMEN_PRICING = {
-  volledigeRemservice: { prijs: 45, eenheid: "per kant" },
-  remblokkenVervangen: { prijs: 25, eenheid: "per kant" },
-} as const;
+export const REMMEN_PRICING = [
+  { id: "remblokken", prijs: 25, eenheid: "per kant" },
+  { id: "bleeden", prijs: 35, eenheid: "per kant" },
+  { id: "combiDeal", prijs: 100, eenheid: null },
+] as const;
 
 // Onderhoud prijzen
-export const ONDERHOUD_PRICING = {
-  preventieveOnderhoudsbeurt: {
-    prijs: 90,
-    beschrijving: "Controle en afstelling remmen, ketting, bouten en moeren, algemene technische check",
-  },
-} as const;
+export const ONDERHOUD_PRICING = [
+  { id: "kleineBeurt", prijs: 35 },
+  { id: "groteBeurt", prijs: 95 },
+] as const;
+
+// Overige diensten (op aanvraag)
+export const OVERIG_DIENSTEN = [
+  { id: "smartUnit" },
+  { id: "elektronisch" },
+  { id: "combinatie" },
+  { id: "overdracht" },
+  { id: "rijklaar" },
+] as const;
 
 // Live Feed Items - aangepast aan businessplan diensten
 export const LIVE_FEED_ITEMS = [

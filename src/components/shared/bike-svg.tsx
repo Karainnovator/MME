@@ -26,11 +26,11 @@ const HOTSPOT_POSITIONS = {
 // Mobile hotspot positions
 const HOTSPOT_POSITIONS_MOBILE = {
   battery: { top: '32%', left: '46%' },
-  frontWheel: { top: '62%', left: '80%' },
+  frontWheel: { top: '56%', left: '80%' },
   display: { top: '32%', left: '58%' },
   button: { top: '20%', left: '82%' },
   eshifter: { top: '48%', left: '44%' },
-  backWheel: { top: '62%', left: '20%' },
+  backWheel: { top: '56%', left: '20%' },
 } as const;
 
 // Map component ID to translation key

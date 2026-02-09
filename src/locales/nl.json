@@ -6,6 +6,7 @@
   "navDiagnose": "Diagnose",
   "navConfigurator": "Configurator",
   "navDiensten": "Diensten",
+  "navOnderhoud": "Onderhoud",
   "navContact": "Contact",
   "navCallDirect": "Bel direct",
 
@@ -86,6 +87,8 @@
   "configuratorModelQuestion": "Welk model heb je?",
   "configuratorProblemQuestion": "Wat is het probleem?",
   "configuratorEstimatedCost": "GESCHATTE KOSTEN",
+  "configuratorCost": "KOSTEN",
+  "configuratorFixedPriceNote": "Vaste prijs, inclusief arbeid",
   "configuratorSelectPart": "Selecteer onderdeel",
   "configuratorDiagnose": "Diagnose",
   "configuratorLabor": "Arbeid",
@@ -204,5 +207,41 @@
   "bikeSvgLabel": "VanMoof S3 fiets diagram",
 
   "langNL": "Nederlands",
-  "langEN": "English"
+  "langEN": "English",
+
+  "maintenanceLabel": "ONDERHOUD & REMMEN",
+  "maintenanceTitle": "Onderhoud & services",
+  "maintenanceSubtitle": "Houd je VanMoof in topconditie met onze onderhouds- en remdiensten.",
+
+  "maintenanceTabReparaties": "Reparaties",
+  "maintenanceTabRemmen": "Remmen",
+  "maintenanceTabOnderhoud": "Onderhoud",
+  "maintenanceTabOverig": "Overig",
+
+  "maintenanceService": "Dienst",
+  "maintenancePrice": "Prijs",
+  "maintenanceDescription": "Omschrijving",
+
+  "maintenanceRemblokken": "Remblokken vervangen",
+  "maintenanceRemblokkenPrice": "€ 25 per kant",
+  "maintenanceBleeden": "Remmen ontluchten (bleeden)",
+  "maintenanceBleedenPrice": "€ 35 per kant",
+  "maintenanceCombiDeal": "Combi-deal: beide wielen remblokken + bleeden",
+  "maintenanceCombiDealPrice": "€ 100",
+  "maintenanceCombiDealBadge": "Combi-deal",
+
+  "maintenanceKleineBeurt": "Kleine onderhoudsbeurt",
+  "maintenanceKleineBeurtPrice": "€ 35",
+  "maintenanceKleineBeurtDesc": "Kettingservice, veiligheidscheck, oliën, remmen schoonspuiten, remschijven schuren",
+  "maintenanceGroteBeurt": "Grote onderhoudsbeurt",
+  "maintenanceGroteBeurtPrice": "€ 95",
+  "maintenanceGroteBeurtDesc": "Alles van kleine beurt + spatborden & stuur opnieuw spuiten, alle bouten/moeren checken en vervangen indien nodig, krassen herstellen",
+
+  "maintenanceOverigTitle": "Op aanvraag",
+  "maintenanceOverigSubtitle": "De volgende diensten worden uitsluitend op aanvraag uitgevoerd, afhankelijk van diagnose en technische haalbaarheid:",
+  "maintenanceSmartUnit": "Smart unit reparaties",
+  "maintenanceElektronisch": "Complexe elektronische storingen",
+  "maintenanceCombinatie": "Combinatieproblemen met meerdere foutcodes",
+  "maintenanceOverdracht": "Overdracht fiets naar nieuwe eigenaar (QR-code / Apple Find My)",
+  "maintenanceRijklaar": "Fiets rijklaar maken voor verkoop"
 }

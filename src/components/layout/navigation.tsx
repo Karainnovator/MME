@@ -19,6 +19,7 @@ export function Navigation() {
     { href: '#diagnose', label: t('navDiagnose') },
     { href: '#configurator', label: t('navConfigurator') },
     { href: '#diensten', label: t('navDiensten') },
+    { href: '#onderhoud', label: t('navOnderhoud') },
     { href: '#contact', label: t('navContact') },
   ];
 

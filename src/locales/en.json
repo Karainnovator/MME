@@ -6,6 +6,7 @@
   "navDiagnose": "Diagnose",
   "navConfigurator": "Configurator",
   "navDiensten": "Services",
+  "navOnderhoud": "Maintenance",
   "navContact": "Contact",
   "navCallDirect": "Call now",
 
@@ -86,6 +87,8 @@
   "configuratorModelQuestion": "Which model do you have?",
   "configuratorProblemQuestion": "What is the problem?",
   "configuratorEstimatedCost": "ESTIMATED COST",
+  "configuratorCost": "COST",
+  "configuratorFixedPriceNote": "Fixed price, including labor",
   "configuratorSelectPart": "Select component",
   "configuratorDiagnose": "Diagnosis",
   "configuratorLabor": "Labor",
@@ -204,5 +207,41 @@
   "bikeSvgLabel": "VanMoof S3 bike diagram",
 
   "langNL": "Nederlands",
-  "langEN": "English"
+  "langEN": "English",
+
+  "maintenanceLabel": "MAINTENANCE & BRAKES",
+  "maintenanceTitle": "Maintenance & services",
+  "maintenanceSubtitle": "Keep your VanMoof in top condition with our maintenance and brake services.",
+
+  "maintenanceTabReparaties": "Repairs",
+  "maintenanceTabRemmen": "Brakes",
+  "maintenanceTabOnderhoud": "Maintenance",
+  "maintenanceTabOverig": "Other",
+
+  "maintenanceService": "Service",
+  "maintenancePrice": "Price",
+  "maintenanceDescription": "Description",
+
+  "maintenanceRemblokken": "Brake pad replacement",
+  "maintenanceRemblokkenPrice": "€ 25 per side",
+  "maintenanceBleeden": "Brake bleeding",
+  "maintenanceBleedenPrice": "€ 35 per side",
+  "maintenanceCombiDeal": "Combo deal: both wheels brake pads + bleeding",
+  "maintenanceCombiDealPrice": "€ 100",
+  "maintenanceCombiDealBadge": "Combo deal",
+
+  "maintenanceKleineBeurt": "Small maintenance service",
+  "maintenanceKleineBeurtPrice": "€ 35",
+  "maintenanceKleineBeurtDesc": "Chain service, safety check, oiling, brake cleaning, disc sanding",
+  "maintenanceGroteBeurt": "Full maintenance service",
+  "maintenanceGroteBeurtPrice": "€ 95",
+  "maintenanceGroteBeurtDesc": "Everything from small service + fenders & handlebars respray, all bolts/nuts checked and replaced if needed, scratch repair",
+
+  "maintenanceOverigTitle": "On request",
+  "maintenanceOverigSubtitle": "The following services are performed exclusively on request, depending on diagnosis and technical feasibility:",
+  "maintenanceSmartUnit": "Smart unit repairs",
+  "maintenanceElektronisch": "Complex electronic malfunctions",
+  "maintenanceCombinatie": "Combination problems with multiple error codes",
+  "maintenanceOverdracht": "Bike transfer to new owner (QR code / Apple Find My)",
+  "maintenanceRijklaar": "Preparing bike for sale"
 }
