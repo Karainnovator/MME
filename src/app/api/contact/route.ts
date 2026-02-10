@@ -73,7 +73,7 @@ export async function POST(request: Request) {
     const safeModel = escapeHtml(String(model).slice(0, 50));
     const safeProblem = problem ? escapeHtml(String(problem).slice(0, 1000)) : '';
 
-    await resend.emails.send({
+    const { error: sendError } = await resend.emails.send({
       from: 'MME Contact <contact@mmedienstverlening.nl>',
       replyTo: safeEmail,
       to: 'manno.elwasty@icloud.com',
@@ -107,6 +107,14 @@ export async function POST(request: Request) {
         <p style="margin-top: 16px; color: #666; font-size: 12px;">Verzonden via mmedienstverlening.nl</p>
       `,
     });
+
+    if (sendError) {
+      console.error('Resend error:', sendError);
+      return NextResponse.json(
+        { error: sendError.message || 'Email kon niet worden verstuurd' },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json({ success: true });
   } catch (error) {
