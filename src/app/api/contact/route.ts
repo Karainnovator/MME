@@ -74,7 +74,7 @@ export async function POST(request: Request) {
     const safeProblem = problem ? escapeHtml(String(problem).slice(0, 1000)) : '';
 
     await resend.emails.send({
-      from: 'MME Contact <onboarding@resend.dev>',
+      from: 'MME Contact <contact@mmedienstverlening.nl>',
       replyTo: safeEmail,
       to: 'manno.elwasty@icloud.com',
       subject: `Nieuw contactverzoek van ${safeName} — ${safeModel}`,
