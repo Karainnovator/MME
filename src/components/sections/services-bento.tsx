@@ -87,9 +87,9 @@ export default function ServicesBento() {
                     </div>
 
                     {/* Title */}
-                    <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">
+                    <p className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">
                       {t(`${keyPrefix}Title`)}
-                    </h3>
+                    </p>
 
                     {/* Description */}
                     <p className="text-sm sm:text-base text-muted-foreground mb-3 sm:mb-4 flex-grow">

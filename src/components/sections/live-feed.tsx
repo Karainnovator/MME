@@ -84,7 +84,7 @@ export default function LiveFeed() {
                     <div className="flex items-center gap-3">
                       <StatusIcon status={item.status} />
                       <div>
-                        <h3 className="font-bold text-foreground">{item.model}</h3>
+                        <p className="font-bold text-foreground">{item.model}</p>
                         <span className={`text-xs font-medium ${
                           item.status === 'completed' ? 'text-green-400' : 'text-gold'
                         }`}>

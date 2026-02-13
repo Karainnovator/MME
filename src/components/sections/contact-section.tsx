@@ -223,7 +223,7 @@ export function ContactSection() {
                     >
                       <CheckCircle2 className="size-8 sm:size-10 text-green-500" />
                     </motion.div>
-                    <h3 className="text-xl sm:text-2xl font-bold">{t('contactFormSuccessTitle')}</h3>
+                    <p className="text-xl sm:text-2xl font-bold">{t('contactFormSuccessTitle')}</p>
                     <p className="text-sm sm:text-base text-muted-foreground max-w-sm">{t('contactFormSuccess')}</p>
                     <Button
                       variant="outline"
@@ -238,7 +238,7 @@ export function ContactSection() {
                   <motion.div key="form" initial={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}>
                 {/* Form Header */}
                 <div className="mb-4 sm:mb-6 space-y-1 sm:space-y-2">
-                  <h3 className="text-xl sm:text-2xl font-bold">{t('contactFormTitle')}</h3>
+                  <p className="text-xl sm:text-2xl font-bold">{t('contactFormTitle')}</p>
                   <p className="text-xs sm:text-sm text-muted-foreground">{t('contactFormSubtitle')}</p>
                 </div>
 

@@ -30,9 +30,9 @@ export function Footer() {
 
           {/* Diensten Column */}
           <div className="space-y-3 sm:space-y-4">
-            <h3 className="text-xs uppercase tracking-widest text-foreground font-bold">
+            <p className="text-xs uppercase tracking-widest text-foreground font-bold">
               {t('footerServices')}
-            </h3>
+            </p>
             <nav className="flex flex-col space-y-2">
               <a
                 href="#diensten"
@@ -63,9 +63,9 @@ export function Footer() {
 
           {/* Contact Column */}
           <div className="space-y-3 sm:space-y-4">
-            <h3 className="text-xs uppercase tracking-widest text-foreground font-bold">
+            <p className="text-xs uppercase tracking-widest text-foreground font-bold">
               {t('footerContact')}
-            </h3>
+            </p>
             <div className="flex flex-col space-y-2">
               <a
                 href={`tel:${CONTACT.phoneClean}`}
@@ -100,9 +100,9 @@ export function Footer() {
 
           {/* Werkgebied Column */}
           <div className="space-y-3 sm:space-y-4">
-            <h3 className="text-xs uppercase tracking-widest text-foreground font-bold">
+            <p className="text-xs uppercase tracking-widest text-foreground font-bold">
               {t('footerWorkArea')}
-            </h3>
+            </p>
             <div className="flex flex-col space-y-2">
               <span className="text-xs sm:text-sm text-muted-foreground">{t('locationAmsterdam')}</span>
               <span className="text-xs sm:text-sm text-muted-foreground">{t('locationRotterdam')}</span>

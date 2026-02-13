@@ -79,7 +79,7 @@ export default function RepairConfigurator() {
               <div className="space-y-6 sm:space-y-8">
                 {/* Step 1 - Model Selection (always visible) */}
                 <div className="space-y-4 sm:space-y-6">
-                  <h3 className="text-xl sm:text-2xl font-semibold">{t('configuratorModelQuestion')}</h3>
+                  <p className="text-xl sm:text-2xl font-semibold">{t('configuratorModelQuestion')}</p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                     {BIKE_MODELS.map((bike) => {
                       const isSelected = model === bike.id;
@@ -116,7 +116,7 @@ export default function RepairConfigurator() {
                             </svg>
                           </div>
                           <div>
-                            <h4 className="text-2xl sm:text-3xl font-bold mb-1 sm:mb-2">{t(`model${bike.id.toUpperCase()}`)}</h4>
+                            <p className="text-2xl sm:text-3xl font-bold mb-1 sm:mb-2">{t(`model${bike.id.toUpperCase()}`)}</p>
                             <p className="text-xs sm:text-sm text-muted-foreground">{t(`model${bike.id.toUpperCase()}Description`)}</p>
                           </div>
                         </motion.button>
@@ -200,7 +200,7 @@ export default function RepairConfigurator() {
                                   </div>
                                 </div>
                                 <div className="space-y-0.5 sm:space-y-1">
-                                  <h4 className="font-semibold text-base sm:text-lg">{t(keyPrefix)}</h4>
+                                  <p className="font-semibold text-base sm:text-lg">{t(keyPrefix)}</p>
                                   <p className="text-xs sm:text-sm font-medium text-gold">{t(`${keyPrefix}Price`)}</p>
                                   <p className="text-xs text-muted-foreground">{t(`${keyPrefix}Code`)}</p>
                                 </div>
@@ -249,7 +249,7 @@ export default function RepairConfigurator() {
                               </div>
                             </div>
                             <div className="space-y-0.5 sm:space-y-1">
-                              <h4 className="font-semibold text-base sm:text-lg">{t('maintenanceCombiDeal')}</h4>
+                              <p className="font-semibold text-base sm:text-lg">{t('maintenanceCombiDeal')}</p>
                               <p className="text-xs sm:text-sm font-medium text-gold">{t('maintenanceCombiDealPrice')}</p>
                             </div>
                           </div>
@@ -300,7 +300,7 @@ export default function RepairConfigurator() {
                                 </div>
                               </div>
                               <div className="space-y-0.5 sm:space-y-1">
-                                <h4 className="font-semibold text-sm sm:text-base">{t(key)}</h4>
+                                <p className="font-semibold text-sm sm:text-base">{t(key)}</p>
                                 <p className="text-xs font-medium text-gold">{t('maintenanceOverigTitle')}</p>
                               </div>
                             </div>
@@ -326,9 +326,9 @@ export default function RepairConfigurator() {
               <Card className="bg-surface-elevated border-gold/20">
                 <div className="p-4 sm:p-5 md:p-6 space-y-4 sm:space-y-5 md:space-y-6">
                   <div>
-                    <h3 className="text-xs font-bold tracking-widest text-gold uppercase mb-3 sm:mb-4">
+                    <p className="text-xs font-bold tracking-widest text-gold uppercase mb-3 sm:mb-4">
                       {showRepairPricing ? t('configuratorEstimatedCost') : t('configuratorCost')}
-                    </h3>
+                    </p>
 
                     <AnimatePresence mode="wait">
                       {sidebarPrice ? (
@@ -453,7 +453,7 @@ function ServiceCard({
         </div>
       </div>
       <div className="space-y-0.5 sm:space-y-1">
-        <h4 className="font-semibold text-base sm:text-lg">{title}</h4>
+        <p className="font-semibold text-base sm:text-lg">{title}</p>
         <p className="text-xs sm:text-sm font-medium text-gold">{price}</p>
         {description && <p className="text-xs text-muted-foreground mt-2">{description}</p>}
       </div>

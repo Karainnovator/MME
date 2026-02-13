@@ -116,9 +116,9 @@ export function BikeExplorer() {
                             <path d="M12 17h.01" />
                           </svg>
                         </div>
-                        <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">
+                        <p className="text-xl sm:text-2xl font-bold text-white mb-2">
                           {t('explorerSelectComponent')}
-                        </h3>
+                        </p>
                         <p className="text-sm sm:text-base text-zinc-400 max-w-sm px-4">
                           {t('explorerSelectHint')}
                         </p>
@@ -131,9 +131,9 @@ export function BikeExplorer() {
                             {Icon && <Icon className="w-6 h-6 sm:w-8 sm:h-8 text-gold" />}
                           </div>
                           <div className="flex-1 min-w-0">
-                            <h3 className="text-xl sm:text-2xl font-bold text-white mb-1">
+                            <p className="text-xl sm:text-2xl font-bold text-white mb-1">
                               {t(`${translationPrefix}`)}
-                            </h3>
+                            </p>
                             <p className="text-xs sm:text-sm text-zinc-400">
                               {t(`${translationPrefix}Subtitle`)}
                             </p>
